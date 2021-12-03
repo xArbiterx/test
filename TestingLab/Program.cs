@@ -2,6 +2,7 @@
 using System.Management;
 using System.Xml.Serialization;
 using Microsoft.Win32;
+using NPOI.XWPF.UserModel;
 
 namespace TestingLab
 {
@@ -9,11 +10,10 @@ namespace TestingLab
     {
         public static void Main(string[] args)
         {
-            var a = System.Environment.OSVersion;
-            var b = System.Environment.Is64BitOperatingSystem;
-
-            Console.WriteLine(a + " " + (b ? "64bit" : "32bit"));
-
+            Console.WriteLine(Environment.OSVersion + "," + 
+                (Environment.Is64BitOperatingSystem ? "64bit" : "32bit"));
+            var WordHelper = new WordHelper("11.docx");
+            WordHelper.Save("1.docx");
         }
     }
 }
