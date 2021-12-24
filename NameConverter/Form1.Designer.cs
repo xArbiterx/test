@@ -33,7 +33,7 @@
             this.UpperKebabTextBox = new System.Windows.Forms.TextBox();
             this.LowerKebabTextBox = new System.Windows.Forms.TextBox();
             this.AllUpperKebabTextBox = new System.Windows.Forms.TextBox();
-            this.chkTopMost = new System.Windows.Forms.CheckBox();
+            this.TopMostCheckBox = new System.Windows.Forms.CheckBox();
             this.OriginalTextBox = new System.Windows.Forms.TextBox();
             this.TargetTextBox = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -51,7 +51,7 @@
             this.UpperCamelTextBox.Name = "UpperCamelTextBox";
             this.UpperCamelTextBox.Size = new System.Drawing.Size(125, 27);
             this.UpperCamelTextBox.TabIndex = 0;
-            this.UpperCamelTextBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.UpperCamelTextBox.TextChanged += new System.EventHandler(this.UpperCamelTextBox_TextChanged);
             // 
             // LowerCamelTextBox
             // 
@@ -75,7 +75,7 @@
             this.LowerKebabTextBox.Name = "LowerKebabTextBox";
             this.LowerKebabTextBox.Size = new System.Drawing.Size(125, 27);
             this.LowerKebabTextBox.TabIndex = 3;
-            this.LowerKebabTextBox.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
+            this.LowerKebabTextBox.TextChanged += new System.EventHandler(this.LowerKebabTextBox_TextChanged);
             // 
             // AllUpperKebabTextBox
             // 
@@ -83,18 +83,18 @@
             this.AllUpperKebabTextBox.Name = "AllUpperKebabTextBox";
             this.AllUpperKebabTextBox.Size = new System.Drawing.Size(125, 27);
             this.AllUpperKebabTextBox.TabIndex = 4;
-            this.AllUpperKebabTextBox.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
+            this.AllUpperKebabTextBox.TextChanged += new System.EventHandler(this.AllUpperKebabTextBox_TextChanged);
             // 
             // chkTopMost
             // 
-            this.chkTopMost.AutoSize = true;
-            this.chkTopMost.Location = new System.Drawing.Point(12, 12);
-            this.chkTopMost.Name = "chkTopMost";
-            this.chkTopMost.Size = new System.Drawing.Size(61, 24);
-            this.chkTopMost.TabIndex = 5;
-            this.chkTopMost.Text = "置顶";
-            this.chkTopMost.UseVisualStyleBackColor = true;
-            this.chkTopMost.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.TopMostCheckBox.AutoSize = true;
+            this.TopMostCheckBox.Location = new System.Drawing.Point(12, 12);
+            this.TopMostCheckBox.Name = "chkTopMost";
+            this.TopMostCheckBox.Size = new System.Drawing.Size(61, 24);
+            this.TopMostCheckBox.TabIndex = 5;
+            this.TopMostCheckBox.Text = "置顶";
+            this.TopMostCheckBox.UseVisualStyleBackColor = true;
+            this.TopMostCheckBox.CheckedChanged += new System.EventHandler(this.TopMostCheckBox_CheckedChanged);
             // 
             // OriginalTextBox
             // 
@@ -103,7 +103,7 @@
             this.OriginalTextBox.Name = "OriginalTextBox";
             this.OriginalTextBox.Size = new System.Drawing.Size(253, 363);
             this.OriginalTextBox.TabIndex = 6;
-            this.OriginalTextBox.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
+            this.OriginalTextBox.TextChanged += new System.EventHandler(this.OriginalTextBox_TextChanged);
             // 
             // TargetTextBox
             // 
@@ -194,7 +194,7 @@
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.TargetTextBox);
             this.Controls.Add(this.OriginalTextBox);
-            this.Controls.Add(this.chkTopMost);
+            this.Controls.Add(this.TopMostCheckBox);
             this.Controls.Add(this.AllUpperKebabTextBox);
             this.Controls.Add(this.LowerKebabTextBox);
             this.Controls.Add(this.UpperKebabTextBox);
@@ -214,7 +214,7 @@
         private TextBox UpperKebabTextBox;
         private TextBox LowerKebabTextBox;
         private TextBox AllUpperKebabTextBox;
-        private CheckBox chkTopMost;
+        private CheckBox TopMostCheckBox;
         private TextBox OriginalTextBox;
         private TextBox TargetTextBox;
         private ComboBox comboBox1;

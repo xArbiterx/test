@@ -1,3 +1,5 @@
+using System;
+
 namespace NameConverter
 {
     public partial class BaseForm : Form
@@ -7,40 +9,47 @@ namespace NameConverter
             InitializeComponent();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void UpperCamelTextBox_TextChanged(object sender, EventArgs e)
         {
             if (UpperCamelTextBox.Text.Length > 0)
-                LowerCamelTextBox.Text = UpperCamelTextBox.Text.First().ToString().ToLower() + UpperCamelTextBox.Text.Substring(1);
+            {
+                LowerCamelTextBox.Text = string.Concat(UpperCamelTextBox.Text.First().ToString().ToLower(), UpperCamelTextBox.Text.AsSpan(1));
+                
+            }
         }
 
-        private void textBox4_TextChanged(object sender, EventArgs e)
+        private void LowerKebabTextBox_TextChanged(object sender, EventArgs e)
         {
             if (LowerKebabTextBox.Text.Length > 0)
+            {
                 AllUpperKebabTextBox.Text = LowerKebabTextBox.Text.First().ToString().ToLower() + LowerKebabTextBox.Text.Substring(1);
+            }
         }
 
-        private void textBox5_TextChanged(object sender, EventArgs e)
+        private void AllUpperKebabTextBox_TextChanged(object sender, EventArgs e)
         {
-
-
             var arr = AllUpperKebabTextBox.Text.Split("_");
             var str = "";
             foreach (var item in arr)
             {
                 if (item.Length > 0)
+                {
                     str += item.First().ToString().ToUpper() + item.Substring(1).ToLower();
-
+                }
             }
             UpperCamelTextBox.Text = str;
             if (str.Length > 0)
+            {
                 str = str.First().ToString().ToLower() + str.Substring(1);
+            }
+
             LowerCamelTextBox.Text = str;
 
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void TopMostCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkTopMost.Checked)
+            if (TopMostCheckBox.Checked)
             {
                 this.TopMost = true;
             }
@@ -50,7 +59,7 @@ namespace NameConverter
             }
         }
 
-        private void textBox6_TextChanged(object sender, EventArgs e)
+        private void OriginalTextBox_TextChanged(object sender, EventArgs e)
         {
             //TargetTextBox.Text = "";
             //foreach (string line in OriginalTextBox.Lines)
@@ -97,9 +106,9 @@ namespace NameConverter
         private void LowerCamelTextBox_TextChanged(object sender, EventArgs e)
         {
             if (LowerCamelTextBox.Text.Length > 0)
+            {
                 UpperCamelTextBox.Text = LowerCamelTextBox.Text.First().ToString().ToUpper() + LowerCamelTextBox.Text.Substring(1);
-
-
+            }
         }
 
         private void UpperKebabTextBox_TextChanged(object sender, EventArgs e)
