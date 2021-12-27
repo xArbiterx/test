@@ -10,10 +10,14 @@ namespace TestConsole
     {
         private const string PROP = "prop";
         private const string CLASS = "class";
+
+        private const string DECLARE = "public %s %s {get; set;}";
+
         public static void Test1()
         {
-            string xml = "<xxx><xxx1></xxx1><xxx11></xxx11><xxxx/></xxx>";
+            string xml = "<xxx><xxx1></xxx1><xxx11></xxx11><xxxx/><aaaa><aaa1></aaa1></aaaa></xxx>";
             xml = xml.Trim();
+            List<string> classList = new List<string>();
             Queue<string> nameTextQueue = new();
 
             int start = 0, end = 0;
@@ -48,7 +52,6 @@ namespace TestConsole
                 }
             }
 
-            StringBuilder sb = new StringBuilder();
             //当前对象栈 (节点名称)
             Stack<string> stack = new();
             // 字典（父节点名称，（栈（子节点名称，类型<字段或者对象>）））
@@ -63,7 +66,7 @@ namespace TestConsole
 
                 if (currText.Last() == '/')
                 {
-                    dic.Add(new KeyValuePair<string, KeyValuePair<string, string>>(stack.Peek(), new KeyValuePair<string, string>(textArr[0].Replace("/>", ""), PROP)));
+                    dic.Add(new KeyValuePair<string, KeyValuePair<string, string>>(stack.Peek(), new KeyValuePair<string, string>(textArr[0].Replace("/", ""), PROP)));
                 }
                 else if (!textArr[0].Contains("/"))
                 {
@@ -74,41 +77,38 @@ namespace TestConsole
                     }
                     else
                     {
-                        if (lastName != textArr[0])
-                        {
-                            if (stack.Count == 0 || stack.Peek() != lastName)
-                            {
-                                stack.Push(lastName);
-                            }
-                        }
+                        lastName = textArr[0];
                     }
+                    stack.Push(lastName);
+
                 }
                 else if (textArr[0] == "/" + currStack.Peek())
                 {
                     //是则是属性，否则是class
                     if (currStack.Peek() == lastName)
                     {
+                        stack.Pop();
                         if (stack.Count > 0)
                         {
-                            dic.Add(new KeyValuePair<string, KeyValuePair<string, string>>(stack.Peek(), new KeyValuePair<string, string>(textArr[0], PROP)));
+                            dic.Add(new KeyValuePair<string, KeyValuePair<string, string>>(stack.Peek(), new KeyValuePair<string, string>(currStack.Pop(), PROP)));
                         }
                     }
                     else
                     {
-                        if (stack.Count > 0 && stack.Peek() == currStack.Peek())
+                        if (stack.Count > 0 && (stack.Peek() == currStack.Peek() || stack.Peek() == lastName))
                         {
                             stack.Pop();
                         }
-
+                        classList.Add(currStack.Peek());
                         if (stack.Count > 0)
                         {
-                            dic.Add(new KeyValuePair<string, KeyValuePair<string, string>>(stack.Peek(), new KeyValuePair<string, string>(currStack.Pop(), PROP)));
-                            lastName = stack.Peek();
+                            dic.Add(new KeyValuePair<string, KeyValuePair<string, string>>(stack.Peek(), new KeyValuePair<string, string>(currStack.Pop(), CLASS)));
                         }
                         else
                         {
                             dic.Add(new KeyValuePair<string, KeyValuePair<string, string>>("", new KeyValuePair<string, string>(currStack.Pop(), CLASS)));
                         }
+
                     }
                 }
                 else
@@ -116,7 +116,9 @@ namespace TestConsole
                     throw new Exception();
                 }
             }
-            int a = 0;
+            StringBuilder sb = new StringBuilder();
+
+            
         }
     }
 }
